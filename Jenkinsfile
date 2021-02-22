@@ -9,7 +9,7 @@ pipeline {
                 script {
                     properties([pipelineTriggers([pollSCM('*/30 * * * *')])])
                 }
-                git 'https://github.com/keidar/Project2.git'
+                git 'https://github.com/keidar/Project3.git'
             }
         }
         stage('run rest app server ') {
@@ -20,14 +20,7 @@ pipeline {
                 }
             }
         }
-        stage('run web app server') {
-            steps {
-                script {
-                    sh 'nohup python web_app.py &'
 
-                }
-            }
-        }
         stage('run backend testing') {
             steps {
                 script {
@@ -36,23 +29,7 @@ pipeline {
                 }
             }
         }
-        stage('run frontend testing') {
-            steps {
-                script {
-                    sh 'python frontend_testing.py'
-
-                }
-            }
-        }
-        stage('run combined testing') {
-            steps {
-                script {
-                    sh 'python combined_testing.py'
-
-                }
-            }
-        }
-        stage('run clean environmant ') {
+        stage('run clean environment ') {
             steps {
                 script {
                     sh ' python clean_environment.py'
