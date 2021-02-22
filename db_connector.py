@@ -9,6 +9,7 @@ env_path = Path('') / '.env'
 load_dotenv(dotenv_path=env_path)
 db_table = os.environ['DB_TABLE']
 
+
 # Establish connection to DB
 def get_con():
     conn = pymysql.connect(host='remotemysql.com', port=3306, user=os.environ['USER_NAME'], passwd=os.environ['PASSWD'],
