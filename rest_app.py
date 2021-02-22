@@ -1,7 +1,7 @@
 from datetime import datetime
 from flask import Flask, request
 from db_connector import *
-from numpy import random
+import random
 import signal
 import os
 
