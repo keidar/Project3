@@ -37,5 +37,28 @@ pipeline {
                 }
             }
         }
+        stage('build docker image ') {
+            steps {
+                script {
+                    sh ' docker build -t project3 .'
+                }
+            }
+        }
+        stage('run clean environment ') {
+            steps {
+                script {
+                    sh ' python clean_environment.py'
+
+                }
+            }
+        }
+        stage('run clean environment ') {
+            steps {
+                script {
+                    sh ' python clean_environment.py'
+
+                }
+            }
+        }
     }
 }
