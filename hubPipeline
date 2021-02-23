@@ -1,9 +1,10 @@
 pipeline {
-    environment {
-    registry = "keidarb/project3_repo"
-    registryCredential = 'docker_hub'
-    dockerImage = ''
-    }
+    agent any
+        environment {
+        registry = "keidarb/project3_repo"
+        registryCredential = 'docker_hub'
+        dockerImage = ''
+        }
     stages {
         stage('Pull Code') {
                 steps {
