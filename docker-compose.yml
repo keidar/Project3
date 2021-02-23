@@ -1,4 +1,4 @@
-version: '${IMAGE_TAG}'
+version: ${IMAGE_TAG}
 services:
   web:
     build: .
