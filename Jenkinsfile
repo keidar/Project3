@@ -58,16 +58,16 @@ pipeline {
                     }
                 }
             }
-            post{
-        always{
-            sh "docker rmi $registry:$BUILD_NUMBER"
-        }
-       }
+         }
+                post{
+            always{
+                sh "docker rmi $registry:$BUILD_NUMBER"
+            }
+           }
         stage('Set compose image version ') {
             steps {
                 script {
                     sh ' echo IMAGE_TAG=3 > .env'
-
                 }
             }
         }
@@ -75,7 +75,6 @@ pipeline {
             steps {
                 script {
                     sh ' docker-compose up -d '
-
                 }
             }
         }
@@ -83,16 +82,14 @@ pipeline {
             steps {
                 script {
                     sh ' python docker_backend_testing.py'
-
                 }
             }
         }
-         stage('run clean docker environment  environment ') {
+         stage('run clean docker environment environment ') {
             steps {
                 script {
                     sh 'docker rmi project3'
                     sh 'docker-compose down'
-
                 }
             }
         }
