@@ -1,5 +1,10 @@
 pipeline {
     agent any
+    environment {
+        registry = "keidarb/project3_repo"
+        registryCredential = 'docker_hub'
+        dockerImage = ''
+        }
     options {
         buildDiscarder(logRotator(numToKeepStr:'20',daysToKeepStr:'5' ))
     }
@@ -44,18 +49,49 @@ pipeline {
                 }
             }
         }
-        stage('run clean environment ') {
+        stage('Push docker image ') {
             steps {
                 script {
-                    sh ' python clean_environment.py'
+                    dockerImage = docker.build registry + ":$BUILD_NUMBER"
+                    docker.withRegistry('', registryCredential) {
+                    dockerImage.push()
+                    }
+                }
+            }
+            post{
+        always{
+            sh "docker rmi $registry:$BUILD_NUMBER"
+        }
+       }
+        stage('Set compose image version ') {
+            steps {
+                script {
+                    sh ' echo IMAGE_TAG=3 > .env'
 
                 }
             }
         }
-        stage('run clean environment ') {
+        stage('run docker compose ') {
             steps {
                 script {
-                    sh ' python clean_environment.py'
+                    sh ' docker-compose up -d '
+
+                }
+            }
+        }
+        stage('run docker backend testing') {
+            steps {
+                script {
+                    sh ' python docker_backend_testing.py'
+
+                }
+            }
+        }
+         stage('run clean docker environment  environment ') {
+            steps {
+                script {
+                    sh 'docker rmi project3'
+                    sh 'docker-compose down'
 
                 }
             }
