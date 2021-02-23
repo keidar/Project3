@@ -62,8 +62,8 @@ pipeline {
             post{
             always{
                 sh "docker rmi $registry:$BUILD_NUMBER"
-            }
-           }
+         }
+       }
         stage('Set compose image version ') {
             steps {
                 script {
