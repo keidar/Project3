@@ -6,7 +6,7 @@ pipeline {
         dockerImage = ''
         }
     options {
-        buildDiscarder(logRotator(numToKeepStr:'20',daysToKeepStr:'5' ))
+        buildDiscarder(logRotator(numToKeepStr: '20', daysToKeepStr: '5' ))
     }
     stages {
         stage('Pull Code') {
