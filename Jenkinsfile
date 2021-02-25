@@ -68,7 +68,7 @@ pipeline {
         stage('Set compose image version ') {
             steps {
                 script {
-                    sh ' echo IMAGE_TAG=3 > .env'
+                    sh ' echo IMAGE_TAG=${BUILD_NUMBER} > .env'
                 }
             }
         }
