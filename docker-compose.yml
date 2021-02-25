@@ -1,7 +1,7 @@
 version: '3'
 services:
   web:
-    build: .
+    image: "keidarb/project3_repo:${BUILD_NUMBER}"
     ports:
      - "5000:5000"
 
